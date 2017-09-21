@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <title>Page title</title>
+    <meta charset=utf-8>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">loading...</div>
+    <script src="https://unpkg.com/vue@2.4.4/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/lodash@4.17.4/lodash.min.js"></script>
+    <script src="https://unpkg.com/moment@2.18.1/min/moment.min.js"></script>
+    <script src="https://unpkg.com/axios@0.16.2/dist/axios.min.js"></script>
+    <script type="text/x-template" id="app-template">
+      <div class="container">
+        <div class="row" style="padding-top: 30px;">
+          <div class="col-xs-6">
+            <div>
+              <div class="form-group">
+                <input v-model.trim="categoryTitle" type="text" class="form-control" id="catetory" placeholder="Enter category name">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary" @click="addCategory" :disabled="disableCategory">Add new Catetory</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div>
+              <div class="form-group">
+                <input v-model.trim="todoTitle" type="text" class="form-control" id="title" placeholder="Enter category name">
+              </div>
+              <div class="form-group">
+                <textarea v-model.trim="todoDescription" class="form-control" id="description" placeholder="Enter description" rows="3"></textarea>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary" @click="addTodo" :disabled="disableTodo">Add new Todo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <hr>
+          <div class="col-xs-6">
+            <h4 class="text-center">Category</h4>
+            <div class="list-group">
+              <a style="cursor: pointer;" @click.stop.prevent="categoryClick(item.id)" class="list-group-item" :class="{'active': item.id == currentCategory}" v-for="item in categories" :key="item.id">{{item.title}}</a>
+            </div>
+            <div v-if="!(categories && categories.length > 0)">Empty</div>
+          </div>
+          <div class="col-xs-6">
+            <h4 class="text-center">Todo</h4>
+            <div>
+              <div class="panel panel-default" v-for="item in todos" :key="item.id">
+                <div class="panel-heading"><b>{{item.title}}</b><br/><small>{{item.createdAt | toDate}}</small></div>
+                <div class="panel-body">{{item.description}}</div>
+              </div>
+              <div v-if="!(todos && todos.length > 0)">Empty</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
