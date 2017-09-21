@@ -96,7 +96,7 @@ Vue.component('my-app', {
   template: '#app-template'
 });
 Vue.filter('toDate', function (value) {
-  return moment.unix(value).format('D/M/YYYY k:mm:ss');
+  return moment.unix(Math.floor(value / 1000)).format('D/M/YYYY k:mm:ss');
 });
 var app = new Vue({
   el: '#app',
